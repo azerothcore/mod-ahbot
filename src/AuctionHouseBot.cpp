@@ -685,7 +685,9 @@ void AuctionHouseBot::Update()
     if ((!AHBSeller) && (!AHBBuyer))
         return;
 
-    WorldSession _session(AHBplayerAccount, NULL, SEC_PLAYER, sWorld->getIntConfig(CONFIG_EXPANSION), 0, LOCALE_zhCN,0,false,false,0);
+    std::string accountName = "AuctionHouseBot" + std::to_string(AHBplayerAccount);
+
+    WorldSession _session(AHBplayerAccount, std::move(accountName), nullptr, SEC_PLAYER, sWorld->getIntConfig(CONFIG_EXPANSION), 0, LOCALE_enUS, 0, false, false, 0);
     Player _AHBplayer(&_session);
     _AHBplayer.Initialize(AHBplayerGUID);
     ObjectAccessor::AddObject(&_AHBplayer);
